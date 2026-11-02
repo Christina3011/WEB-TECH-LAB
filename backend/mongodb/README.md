@@ -9,7 +9,7 @@ data, and demonstrates the MongoDB operations with Art Gallery examples.
 Start a local MongoDB server, then run this from the project directory:
 
 ```powershell
-mongosh "mongodb://127.0.0.1:27017" --file mongodb/experiment10.mongodb.js
+mongosh "mongodb://127.0.0.1:27017" --file backend/mongodb/experiment10.mongodb.js
 ```
 
 For the interactive shell concepts, enter `show dbs`, then `use artGalleryDB`,
@@ -22,7 +22,8 @@ temporary records created for that particular run.
 
 ## Connect the Express website
 
-Set `MONGODB_URI` in the same PowerShell window used to start the site:
+Set `MONGODB_URI` in the same PowerShell window used to start the site from
+the project root:
 
 ```powershell
 $env:MONGODB_URI = "mongodb://127.0.0.1:27017"

@@ -4,7 +4,7 @@ const { MongoClient } = require("mongodb");
 
 const app = express();
 const port = 3000;
-const siteDirectory = __dirname;
+const frontendDirectory = path.join(__dirname, "..", "frontend");
 const mongoUri = process.env.MONGODB_URI;
 const mongoClient = mongoUri
     ? new MongoClient(mongoUri, { serverSelectionTimeoutMS: 3000 })
@@ -54,7 +54,7 @@ app.use(express.json());
 
 function servePage(fileName) {
     return function (request, response, next) {
-        response.sendFile(path.join(siteDirectory, fileName), function (error) {
+        response.sendFile(path.join(frontendDirectory, fileName), function (error) {
             if (error) {
                 next(error);
             }
@@ -149,24 +149,7 @@ app.post("/api/contact", async function (request, response, next) {
     }
 });
 
-app.get("/style.css", function (request, response, next) {
-    response.sendFile(path.join(siteDirectory, "style.css"), function (error) {
-        if (error) {
-            next(error);
-        }
-    });
-});
-
-app.get("/script.js", function (request, response, next) {
-    response.sendFile(path.join(siteDirectory, "script.js"), function (error) {
-        if (error) {
-            next(error);
-        }
-    });
-});
-
-app.use("/images", express.static(path.join(siteDirectory, "images")));
-app.use("/build", express.static(path.join(siteDirectory, "build")));
+app.use(express.static(frontendDirectory));
 
 app.use(function (request, response) {
     response.status(404).send("Page not found.");

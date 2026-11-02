@@ -2,17 +2,12 @@
   "name": "art-gallery",
   "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
-    "build": "esbuild src/main.jsx --bundle --outdir=build --entry-names=main",
-    "start": "npm run build && node app.js"
-  },
-  "dependencies": {
-    "express": "^5.1.0",
-    "mongodb": "^7.8.0",
-    "react": "^19.3.1",
-    "react-dom": "^19.3.1"
-  },
-  "devDependencies": {
-    "esbuild": "^0.28.2"
+    "build": "npm run build --workspace frontend",
+    "start": "npm run build --workspace frontend && npm start --workspace backend"
   }
 }
